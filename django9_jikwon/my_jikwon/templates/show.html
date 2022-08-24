@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+</head>
+<body>
+* 직원 자료 *<p/>
+{% if datas %}
+{{datas|safe}}
+{% endif %}
+<hr>
+직급별 연봉의 합<br>
+과장 : {{jik_group.sum.과장}}<br>
+대리 : {{jik_group.sum.대리}}<br>
+부장 : {{jik_group.sum.부장}}<br>
+사원 : {{jik_group.sum.사원}}<br>
+이사 : {{jik_group.sum.이사}}<br>
+<br>
+직급별 연봉의 평균<br>
+과장 : {{jik_group.avg.과장}}<br>
+대리 : {{jik_group.avg.대리}}<br>
+부장 : {{jik_group.avg.부장}}<br>
+사원 : {{jik_group.avg.사원}}<br>
+이사 : {{jik_group.avg.이사}}<br>
+<br>
+{% if jik_group2 %}
+{{jik_group2|safe}}
+{% endif %}
+<br>
+직급별 평점별 건수<br>
+{{ctab|safe}}
+<br>
+<img src="/static/images/jik.png" style="width: 50%"/>
+
+<br>
+<canvas id="my_canvas" width="80" height="20"></canvas>
+
+<script type="text/javascript">
+let pays = [];
+let names = [];
+ypays = {{ypays}}
+console.log(pays); 
+names = {{names}}
+console.log(names);
+
+var canvas = document.getElementById('my_canvas');
+var ctx = canvas.getContext('2d');
+var myChart = new Chart(ctx, {
+   type: 'bar',
+   data: {
+      labels: names,
+      datasets: [{
+         label: '연봉',
+         data: ypays,
+      }]
+   }
+});
+</script>
+
+</body>
+</html>

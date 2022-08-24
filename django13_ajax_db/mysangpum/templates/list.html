@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>list.html</title>
+<script type="text/javascript">
+let xhr;
+
+window.onload = function(){
+	document.getElementById("btn1").onclick = function(){
+		xhr = new XMLHttpRequest();
+		
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState === XMLHttpRequest.DONE){
+				if(xhr.status === 200){
+					processFunc();
+				}
+			}
+		}
+		xhr.open("GET", "calldb", true);
+		xhr.send();
+	}
+}
+
+function processFunc(){
+	let parseData = JSON.parse(xhr.responseText);
+	alert(parseData);
+	
+}
+</script>
+</head>
+<body>
+Ajax + DB 연습<p/>
+<button id="btn1">상품자료 출력1</button>
+<br /><br />
+<div id="showData1"></div>
+</body>
+</html>

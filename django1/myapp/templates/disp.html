@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/static/css/test.css">
+<!--  
+<script type="text/javascript">
+window.onload = function(){
+	alert("자바스크립트");
+}
+</script>
+-->
+
+<script type="text/javascript" src="/static/js/test.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	//alert("good");
+	$("#myImg").click(function(){
+		funcgo();
+	});
+});
+</script>
+</head>
+<body>
+<span style="color:blue">안녕</span>
+{{str|safe}}
+<hr>
+<img src="/static/images/abc.png" id="myImg" />
+
+</body>
+</html>

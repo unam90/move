@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+let xhr;
+
+window.onload = function(){
+	document.querySelector("#btn1").addEventListener("click", ()=>{
+		//alert("a");
+		xhr = new XMLHttpRequest();
+		console.log(xhr);
+		
+		xhr.onreadystatechange = function(){
+			//alert(xhr.readyState);
+			if(xhr.readyState === XMLHttpRequest.DONE){  //readyState == 4 (통신상태 이상없음)
+				if(xhr.status === 200){  // 요청한 문서가 잘 넘어오면 200
+					console.log(xhr.response);
+					process1();
+					
+				}
+			}
+		}
+		
+		url = "startajax?msg=" + document.querySelector("#txtMsg").value;
+		xhr.open('GET', url, true);  //ture를 써야 비동기방식, false는 동기방식
+		xhr.send();
+	});
+	
+	document.querySelector("#btn2").onclick = function(){
+		xhr = new XMLHttpRequest();
+
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState === XMLHttpRequest.DONE){  //readyState == 4 (통신상태 이상없음)
+				if(xhr.status === 200){  // 요청한 문서가 잘 넘어오면 200
+					process2();
+					
+				}
+			}
+		}
+		
+		xhr.open('GET', "goajax", true);  //true를 써야 비동기방식, false는 동기방식
+		xhr.send();
+	};
+	
+	document.querySelector("#btn3").onclick = function(){
+		const url = "chulbalajax";
+		fetch(url).then(res => {
+			if(res.status ===200){
+				return res.json()
+		}else{
+			console.error(`Http err : ${res.status}`);
+			}
+		}).
+		then(jsonData => {
+			process3(jsonData);
+		}).
+		catch(err => {
+			console.log(err);
+		})
+	};
+}
+
+function process1(){
+	//alert(xhr.responseText);
+	let parseData = JSON.parse(xhr.responseText)  // str타입을 json으로 바꿔주기
+	document.querySelector("#showData1").innerText = parseData.key;
+	
+}
+
+function process2(){
+	let parseData2 = JSON.parse(xhr.responseText)  // str타입을 json으로 바꿔주기
+	let ss = "";
+	for(let i=0; i < parseData2.length; i++){
+		ss += parseData2[i].irum + " " + parseData2[i].nai + "<br>";
+	}
+	
+	document.querySelector("#showData2").innerHTML = ss;
+}
+
+function process3(jsonData){
+	let ss = "";
+	for(let i=0; i < jsonData.length; i++){
+		ss += jsonData[i].irum + " " + jsonData[i].nai + "<br>";
+	}
+	
+	document.querySelector("#showData3").innerHTML = ss;
+}
+</script>
+</head>
+<body>
+Ajax 처리<p/>
+늘 하던 작업 : <textarea cols="50" rows="5"></textarea>
+<br />
+자료 입력 : <input type="text" id="txtMsg" value="korea">
+<button id="btn1">Ajax test1</button>
+<br />
+<div id="showData1"></div>
+<hr />
+<button id="btn2">Ajax test2</button>
+<br />
+<div id="showData2"></div>
+<hr />
+<button id="btn3">Ajax test3</button>
+<br />
+<div id="showData3"></div>
+</body>
+</html>

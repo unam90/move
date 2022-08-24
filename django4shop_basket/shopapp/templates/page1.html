@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>page1.html</title>
+<script type="text/javascript">
+window.onload = function(){
+	document.querySelector("#btnOk").onclick = function(){
+		frm.submit();
+	}
+}
+</script>
+</head>
+<body>
+<table>
+	<tr>
+		<td><img src="/static/images/pic1.jpeg" style="width:30%" /></td>
+		<td>
+		<pre>
+		상품명 : 폴로 반바지
+		가격 : 20,000
+		특징 : 가볍고 착용감 좋음
+		</pre>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<form action="cart" name="frm" method="post">{% csrf_token%}
+				<input type="hidden" name="name" value="폴로 반바지"/>
+				<input type="hidden" name="price" value="20000"/>
+				<input type="button" id="btnOk" value="장바구니에 담기" />
+				<input type="button" value="홈페이지로" onclick="history.back()" />				
+			</form>
+		
+		</td>
+	</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>insert.html</title>
+</head>
+<body>
+<h3>* 상품 입력 *</h3>
+<form action="/sangpum/insertok" method="post" name="frm">{% csrf_token %}
+<table style="width: 80%">
+	<tr>
+		<td>코드</td>
+		<td><input type="text" name="code"/><b style="color:red"> {{msg}}</b></td>
+	</tr>
+	<tr>
+		<td>품명</td>
+		<td><input type="text" name="sang"/></td>
+	</tr>
+	<tr>
+		<td>수량</td>
+		<td><input type="text" name="su"/></td>
+	</tr>
+	<tr>
+		<td>단가</td>
+		<td><input type="text" name="dan"/></td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<input type="submit" value="저장"/>
+		</td>
+	</tr>
+</table>
+</form>
+</body>
+</html>

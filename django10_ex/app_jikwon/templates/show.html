@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>직원정보</h1>
+	{% if df %}
+		{{df|safe}}
+	{% endif %}
+	<hr>
+	<h2>부서별 급여 합</h2>
+	총무부: {{detail.sum.총무부}}<br> <!-- sum의 10번 -->
+	영업부: {{detail.sum.영업부}}<br>
+	전산부: {{detail.sum.전산부}}<br>
+	관리부: {{detail.sum.관리부}}<br>
+	<hr>
+	<h2>부서별 급여 평균</h2>
+	총무부: {{detail.avg.총무부}}<br> <!-- avg의 10번 -->
+	영업부: {{detail.avg.영업부}}<br>
+	전산부: {{detail.avg.전산부}}<br>
+	관리부: {{detail.avg.관리부}}<br>
+	<hr>
+	
+	<img src="/static/images/jik.png" title="차트"/>
+	<hr>
+	<h2>부서별 성별 빈도수</h2>
+	{% if ctab %}
+		{{ctab|safe}}
+	{% endif %}
+</body>
+</html>

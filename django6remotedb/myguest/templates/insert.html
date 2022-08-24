@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>insert.html</title>
+<script type="text/javascript">
+window.onload = function(){
+	document.getElementById("btnInsertOk").onclick = confirmFunc;
+	document.getElementById("btnShow").onclick = function(){
+		// alert("b");
+		location.href = "/guest/select";	
+	}
+	
+}
+
+function confirmFunc(){
+	// alert("a");
+	if(frm.title.value === ""){
+		frm.title.placeholder = "제목 입력~";
+		return false;
+	}
+	if(frm.content.value === ""){
+		frm.content.placeholder = "내용 입력~";
+		return false;
+	}
+	
+	frm.submit();
+}
+</script>
+</head>
+<body>
+*방명록 글 입력*<p/>
+<form action="/guest/insertok" name="frm" method="post" onsubmit="return false">{% csrf_token %}
+<table>
+	<tr>
+		<td>제목</td>
+		<td><input type="text" name="title" size="50"/></td>
+	</tr>
+	<tr>
+		<td>내용</td>
+		<td><textarea rows="5", cols="50" name="content"></textarea></td>
+	</tr>
+	<tr>
+		<td colspan="2" style="text-align: center">
+			<input type="button" id="btnInsertOk" value="등록하기" />
+			<input type="button" id="btnShow" value="목록보기" />
+		</td>	
+	</tr>
+</table>
+</form> 
+</body>
+</html>
