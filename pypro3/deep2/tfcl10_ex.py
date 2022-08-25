@@ -46,11 +46,6 @@ y = np.array(data['salary'])
 print(x[:3])
 print(y[:3])
 
-
-print()
-# salary열을 기준으로 상관 정도 보기
-print(data.corr()['salary'])
-
 print()
 # train / test
 from sklearn.model_selection import train_test_split, cross_val_score
@@ -60,7 +55,7 @@ print(train_x.shape, test_x.shape, train_y.shape, test_y.shape)
 
 # randomforest 모델 생성
 from sklearn.ensemble import RandomForestClassifier
-rf = RandomForestClassifier(criterion='entropy', n_estimators = 1000)
+rf = RandomForestClassifier(criterion='entropy', n_estimators = 500)
 rf = rf.fit(train_x, train_y)
 
 print()
@@ -71,7 +66,6 @@ print('실제값:', test_y[:10])
 
 # 분류 정확도
 from sklearn.metrics import accuracy_score
-print('acc:', sum(test_y == pred) / len(test_y))
 print('acc:', accuracy_score(test_y, pred))
 
 print('특성(변수) 중요도 :\n{}'.format(rf.feature_importances_))
@@ -90,10 +84,10 @@ def plot_feature_importances(rf):   # 특성 중요도 시각화
 plot_feature_importances(rf)
 
 # 딥러닝 model 
-from keras import models
+from keras import models, Sequential
 from keras import layers
-model = models.Sequential()
-model.add(layers.Dense(units=64, activation='relu', input_dim=100))  
+model = Sequential()
+model.add(layers.Dense(units=64, activation='relu', input_shape=x.shape[1]))  
 model.add(layers.Dense(units=64, activation='relu'))  
 model.add(layers.Dense(units=46, activation='softmax'))  
 
